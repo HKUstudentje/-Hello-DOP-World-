@@ -30,7 +30,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4149093945072218
 Transform:
   m_ObjectHideFlags: 1
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1407691797341108, guid: fa2691fa674229b42accd484d6940fe4, type: 2}
-  timeWhenExplodes: 0
+  timeWhenExplodes: 6.0398746
   projectileSpeed: 10
   secondsToLive: 2
 --- !u!135 &135968201297512248

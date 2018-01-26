@@ -7,9 +7,9 @@ public class ShootProjectile : MonoBehaviour {
     public GameObject explosionGO;
     public Transform projectileSpawner;
     public Transform cameraTransform;
-    public float raycastLength;
 
     public int currentProjectile;
+    public int projectileAmount;
 
     public List<ProjectileScript> projectileList = new List<ProjectileScript>();
     //public List<ProjectileScript> disabledProjectileList = new List<ProjectileScript>();
@@ -20,13 +20,11 @@ public class ShootProjectile : MonoBehaviour {
     void Start ()
     {
         psc = projectileGO.GetComponent<ProjectileScript>();
-        // For loop, (int i = aantalBenodigdeProjectilesPublicVariabele (van tevoren in te stellen in de editor); i < 0; i--)
-        // Instantiate voor iedere i een projectileGO
-        // Zet m daarna gelijk in een inactive lijst als dat nodig is.
-        // Zet ze in de 
-
-        // Notes(tim): Detect pre-existing projectiles in the scene and move them to the disabledProjectileList?
-        // Setting each projectile in the disabledProjectileList on inactive using foreach. (Not yet possible right now, it contains only projectile scripts.)
+        for( int i = projectileAmount; i > 0; i--)
+        {
+            GameObject newProjectile = Instantiate(projectileGO, projectileSpawner.position, projectileSpawner.rotation);
+            newProjectile.SetActive(false);
+        }
     }
 
     void Update ()
@@ -37,11 +35,10 @@ public class ShootProjectile : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
-            Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, raycastLength);
+            Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity);
             // Checking if the hit object has a rigidbody.(Better than collider, doesn't depend on (no) parents)
             if (hit.rigidbody != null)
             {
-                // Put the Spacecraft script into variable for easier use.
                 // Notes(gb): more importantly: you grab the object only once,
                 // and from then on use a locally scoped variable, which saves a lot of CPU power.
                 Spacecraft sc = hit.rigidbody.GetComponent<Spacecraft>();
@@ -51,14 +48,11 @@ public class ShootProjectile : MonoBehaviour {
                     //Checking if there is no cooldown going on.(Don't use coroutines for cooldowns, keep it simple and all in a row).
                     if (Time.time > sc.timeTilWeCanShoot)
                     {
-
                         //Setting the cooldown until we can shoot again.
                         sc.timeTilWeCanShoot = Time.time + sc.shootCooldown;
-                        //Instead of instantiate use setactive projectile and move to spawnpoint and projectile list!
-                        GameObject newProjectile = Instantiate(projectileGO, projectileSpawner.position, projectileSpawner.rotation);
-                        projectileList.Add(newProjectile.GetComponent<ProjectileScript>());
-                        newProjectile.GetComponent<Rigidbody>().velocity = transform.forward * psc.projectileSpeed;
-                        //Determining which projectile in the list this is, -1 because the list starts at 0.
+                        projectileList.Add(projectileGO.GetComponent<ProjectileScript>());
+                        projectileGO.SetActive(true);
+                        projectileGO.GetComponent<Rigidbody>().velocity = transform.forward * psc.projectileSpeed;
                         currentProjectile = projectileList.Count - 1;
                         projectileList[currentProjectile].timeWhenExplodes = Time.time + projectileList[currentProjectile].secondsToLive;
                     }
@@ -73,10 +67,8 @@ public class ShootProjectile : MonoBehaviour {
             {
                 Instantiate(explosionGO, projectile.transform.position, Quaternion.identity);
                 projectile.gameObject.SetActive(false);
-                //disabledProjectileList.Add(projectile);
                 projectileList.Remove(projectile);
                 //Destroy(projectile.gameObject);
-                // Disable projectile. But I need the gameObject for that, and the list is made up from scripts.
             }
         }
     }
