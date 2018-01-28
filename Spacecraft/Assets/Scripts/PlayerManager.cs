@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootProjectile : MonoBehaviour {
+public class PlayerManager : MonoBehaviour {
     public GameObject projectileGO;
     public GameObject explosionGO;
+    public GameObject spaceCraftGO;
     public Transform projectileSpawner;
     public Transform cameraTransform;
 
@@ -12,15 +13,16 @@ public class ShootProjectile : MonoBehaviour {
     public int projectileAmount;
 
     public List<ProjectileScript> projectileList = new List<ProjectileScript>();
-    //public List<ProjectileScript> disabledProjectileList = new List<ProjectileScript>();
     public List<GameObject> explosionList = new List<GameObject>();
 
     public ProjectileScript psc;
+    public Spacecraft spaceCraftScript;
 
     void Start ()
     {
-        psc = projectileGO.GetComponent<ProjectileScript>();
-        for( int i = projectileAmount; i > 0; i--)
+        spaceCraftScript = spaceCraftGO.GetComponent<Spacecraft>();
+
+        for ( int i = projectileAmount; i > 0; i--)
         {
             GameObject newProjectile = Instantiate(projectileGO, projectileSpawner.position, projectileSpawner.rotation);
             newProjectile.SetActive(false);
@@ -29,7 +31,20 @@ public class ShootProjectile : MonoBehaviour {
 
     void Update ()
     {
-        //Put the ProjectileScript into variable.
+        if(Input.GetKey(KeyCode.W))
+        {
+            Debug.Log("Moving");
+            spaceCraftScript.speedModifier = 1;
+            spaceCraftGO.GetComponent<Rigidbody>().velocity = transform.forward * spaceCraftScript.spaceCraftSpeed * spaceCraftScript.speedModifier;
+        }
+        else
+        {
+            spaceCraftScript.speedModifier = 0;
+            spaceCraftGO.GetComponent<Rigidbody>().velocity = transform.forward * spaceCraftScript.spaceCraftSpeed * spaceCraftScript.speedModifier;
+        }
+
+        // Note(Tim): Shooting is op dit moment nog 'broken', het omzetten naar object pooling is nog niet helemaal gelukt.
+
         // Notes(gb): Don't do this every tick: the same script is needed each tick, 
         // so scope this higher than the Update function (= as class variable)
         if (Input.GetMouseButtonDown(0))
