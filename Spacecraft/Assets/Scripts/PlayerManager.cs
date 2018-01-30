@@ -35,14 +35,10 @@ public class PlayerManager : MonoBehaviour {
     {
         if(Input.GetKey(KeyCode.W))
         {
-            Debug.Log("Moving");
-            spaceCraftRB.AddForceAtPosition(Vector3.forward, transform.position * spaceCraftScript.spaceCraftSpeed);
+            // Debug.Log("Moving");
+            spaceCraftRB.AddForceAtPosition(Vector3.forward * spaceCraftScript.spaceCraftSpeed, transform.position, ForceMode.Impulse);
         }
-        else
-        {
-            spaceCraftRB.velocity = Vector3.zero;
-            spaceCraftRB.angularVelocity = Vector3.zero;
-        }
+    
 
         // Note(Tim): Shooting is op dit moment nog 'broken', het omzetten naar object pooling is nog niet helemaal gelukt.
 
