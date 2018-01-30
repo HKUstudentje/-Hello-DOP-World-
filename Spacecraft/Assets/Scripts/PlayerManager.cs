@@ -33,10 +33,14 @@ public class PlayerManager : MonoBehaviour {
 
     void Update ()
     {
+        // Notes(gb): Make sure to take deltaTime into account, because of time-independent movement.
+        // look a little into what deltaTime is, and why it's used.
+        float dt = Time.deltaTime;
+
         if(Input.GetKey(KeyCode.W))
         {
-            // Debug.Log("Moving");
-            spaceCraftRB.AddForceAtPosition(Vector3.forward * spaceCraftScript.spaceCraftSpeed, transform.position, ForceMode.Impulse);
+            Vector3 force = Vector3.forward * spaceCraftScript.spaceCraftSpeed * dt;
+            spaceCraftRB.AddForceAtPosition(force, transform.position, ForceMode.Impulse);
         }
     
 
