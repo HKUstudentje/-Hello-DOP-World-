@@ -17,10 +17,12 @@ public class PlayerManager : MonoBehaviour {
 
     public ProjectileScript psc;
     public Spacecraft spaceCraftScript;
+    public Rigidbody spaceCraftRB;
 
     void Start ()
     {
         spaceCraftScript = spaceCraftGO.GetComponent<Spacecraft>();
+        spaceCraftRB = spaceCraftGO.GetComponent<Rigidbody>();
 
         for ( int i = projectileAmount; i > 0; i--)
         {
@@ -34,13 +36,12 @@ public class PlayerManager : MonoBehaviour {
         if(Input.GetKey(KeyCode.W))
         {
             Debug.Log("Moving");
-            spaceCraftScript.speedModifier = 1;
-            spaceCraftGO.GetComponent<Rigidbody>().velocity = transform.forward * spaceCraftScript.spaceCraftSpeed * spaceCraftScript.speedModifier;
+            spaceCraftRB.AddForceAtPosition(Vector3.forward, transform.position * spaceCraftScript.spaceCraftSpeed);
         }
         else
         {
-            spaceCraftScript.speedModifier = 0;
-            spaceCraftGO.GetComponent<Rigidbody>().velocity = transform.forward * spaceCraftScript.spaceCraftSpeed * spaceCraftScript.speedModifier;
+            spaceCraftRB.velocity = Vector3.zero;
+            spaceCraftRB.angularVelocity = Vector3.zero;
         }
 
         // Note(Tim): Shooting is op dit moment nog 'broken', het omzetten naar object pooling is nog niet helemaal gelukt.

@@ -370,6 +370,7 @@ MonoBehaviour:
   explosionList: []
   psc: {fileID: 0}
   spaceCraftScript: {fileID: 0}
+  spaceCraftRB: {fileID: 0}
 --- !u!4 &764644715
 Transform:
   m_ObjectHideFlags: 0
@@ -377,7 +378,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 764644713}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.1595144, y: 14.773079, z: 4.9952226}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -465,7 +466,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 962696037}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 297.5, y: 167.5, z: 0}
+  m_LocalPosition: {x: 318, y: 179, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1061100307}
@@ -948,7 +949,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &1701740864
 MonoBehaviour:
@@ -963,8 +964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootCooldown: 1
   timeTilWeCanShoot: 0
-  spaceCraftSpeed: 10
-  speedModifier: 0
+  spaceCraftSpeed: 10000
 --- !u!1 &1905750737
 GameObject:
   m_ObjectHideFlags: 0
