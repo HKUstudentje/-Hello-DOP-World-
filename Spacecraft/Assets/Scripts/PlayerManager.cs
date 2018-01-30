@@ -42,7 +42,25 @@ public class PlayerManager : MonoBehaviour {
             Vector3 force = Vector3.forward * spaceCraftScript.spaceCraftSpeed * dt;
             spaceCraftRB.AddForceAtPosition(force, transform.position, ForceMode.Impulse);
         }
-    
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            Vector3 force = Vector3.back * spaceCraftScript.spaceCraftSpeed * dt;
+            spaceCraftRB.AddForceAtPosition(force, transform.position, ForceMode.Impulse);
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            Vector3 rotation = new Vector3( 0, 1, 0 ) * spaceCraftScript.spaceCraftRotateSpeed * dt;
+            spaceCraftGO.transform.Rotate(rotation);
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            Vector3 rotation = new Vector3( 0, -1, 0 ) * spaceCraftScript.spaceCraftRotateSpeed * dt;
+            spaceCraftGO.transform.Rotate(rotation);
+        }
+
 
         // Note(Tim): Shooting is op dit moment nog 'broken', het omzetten naar object pooling is nog niet helemaal gelukt.
 
