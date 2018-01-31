@@ -39,13 +39,13 @@ public class PlayerManager : MonoBehaviour {
 
         if(Input.GetKey(KeyCode.W))
         {
-            Vector3 force = Vector3.forward * spaceCraftScript.spaceCraftSpeed * dt;
+            Vector3 force = spaceCraftGO.transform.forward * spaceCraftScript.spaceCraftSpeed * dt;
             spaceCraftRB.AddForceAtPosition(force, transform.position, ForceMode.Impulse);
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            Vector3 force = Vector3.back * spaceCraftScript.spaceCraftSpeed * dt;
+            Vector3 force = spaceCraftGO.transform.forward * -spaceCraftScript.spaceCraftSpeed * dt;
             spaceCraftRB.AddForceAtPosition(force, transform.position, ForceMode.Impulse);
         }
 
