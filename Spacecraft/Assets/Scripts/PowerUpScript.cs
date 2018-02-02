@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerUpScript : MonoBehaviour {
-    public int divideReload;
+    public float reloadModifier;
     public Rigidbody spaceCraftGO;
     public Spacecraft sc;
     public bool powerUpActivate;

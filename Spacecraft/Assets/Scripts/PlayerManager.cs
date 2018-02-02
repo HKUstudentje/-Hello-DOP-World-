@@ -69,7 +69,7 @@ public class PlayerManager : MonoBehaviour {
 
         if (powerUpScript.powerUpActivate)
         {
-            spaceCraftScript.shootCooldown /= powerUpScript.divideReload;
+            spaceCraftScript.shootCooldown *= powerUpScript.reloadModifier;
             powerUpScript.powerUpActivate = false;
             powerUpGO.SetActive(false);
         }
