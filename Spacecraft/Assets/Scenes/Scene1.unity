@@ -258,7 +258,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &738017222
 GameObject:
@@ -329,7 +329,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &764644713
 GameObject:
@@ -363,14 +363,16 @@ MonoBehaviour:
   explosionGO: {fileID: 1407691797341108, guid: fa2691fa674229b42accd484d6940fe4,
     type: 2}
   spaceCraftGO: {fileID: 1701740861}
+  powerUpGO: {fileID: 1542452740}
   projectileSpawner: {fileID: 1353327569}
   cameraTransform: {fileID: 1208380140}
   currentProjectile: 0
   projectileAmount: 0
   projectileList: []
   explosionList: []
-  psc: {fileID: 0}
+  projectileScript: {fileID: 0}
   spaceCraftScript: {fileID: 0}
+  powerUpScript: {fileID: 0}
   spaceCraftRB: {fileID: 0}
 --- !u!4 &764644715
 Transform:
@@ -383,7 +385,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &962696037
 GameObject:
@@ -472,13 +474,65 @@ RectTransform:
   m_Children:
   - {fileID: 1061100307}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1001 &1034478088
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4702665353465366, guid: e517cf499d37a394da9b703301c2ee4e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 9.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4702665353465366, guid: e517cf499d37a394da9b703301c2ee4e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4702665353465366, guid: e517cf499d37a394da9b703301c2ee4e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 5.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4702665353465366, guid: e517cf499d37a394da9b703301c2ee4e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4702665353465366, guid: e517cf499d37a394da9b703301c2ee4e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4702665353465366, guid: e517cf499d37a394da9b703301c2ee4e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4702665353465366, guid: e517cf499d37a394da9b703301c2ee4e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4702665353465366, guid: e517cf499d37a394da9b703301c2ee4e, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114645800753597962, guid: e517cf499d37a394da9b703301c2ee4e,
+        type: 2}
+      propertyPath: spaceCraftGO
+      value: 
+      objectReference: {fileID: 1701740863}
+    - target: {fileID: 114645800753597962, guid: e517cf499d37a394da9b703301c2ee4e,
+        type: 2}
+      propertyPath: sc
+      value: 
+      objectReference: {fileID: 1701740864}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e517cf499d37a394da9b703301c2ee4e, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1061100306
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,13 +760,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1208380136}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 15.57, z: -21.83}
+  m_LocalRotation: {x: 0.38268343, y: -0, z: -0, w: 0.92387956}
+  m_LocalPosition: {x: 2.98, y: 34.7, z: -22.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!114 &1208380141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -903,6 +957,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1413809334}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1542452740 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1350288837048024, guid: e517cf499d37a394da9b703301c2ee4e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1034478088}
 --- !u!1 &1701740861
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,7 +986,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1701740861}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.4, y: 14.59, z: -14.6}
+  m_LocalPosition: {x: 3.4, y: 15, z: -14.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1413809335}
@@ -936,7 +995,7 @@ Transform:
   - {fileID: 319106583}
   - {fileID: 1353327569}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1701740863
 Rigidbody:
@@ -967,7 +1026,7 @@ MonoBehaviour:
   shootCooldown: 1
   timeTilWeCanShoot: 0
   spaceCraftSpeed: 20
-  spaceCraftRotateSpeed: 30
+  spaceCraftRotateSpeed: 100
 --- !u!1 &1905750737
 GameObject:
   m_ObjectHideFlags: 0
