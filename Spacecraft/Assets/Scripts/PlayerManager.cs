@@ -6,8 +6,6 @@ public class PlayerManager : MonoBehaviour {
     public GameObject projectileGO;
     public GameObject explosionGO;
     public GameObject spaceCraftGO;
-    public GameObject powerUpGO;
-
     public Transform projectileSpawner;
     public Transform cameraTransform;
 
@@ -17,18 +15,14 @@ public class PlayerManager : MonoBehaviour {
     public List<ProjectileScript> projectileList = new List<ProjectileScript>();
     public List<GameObject> explosionList = new List<GameObject>();
 
-    public ProjectileScript projectileScript;
+    public ProjectileScript psc;
     public Spacecraft spaceCraftScript;
-    public PowerUpScript powerUpScript;
-
     public Rigidbody spaceCraftRB;
 
     void Start ()
     {
         spaceCraftScript = spaceCraftGO.GetComponent<Spacecraft>();
         spaceCraftRB = spaceCraftGO.GetComponent<Rigidbody>();
-
-        powerUpScript = powerUpGO.GetComponent<PowerUpScript>();
 
         for ( int i = projectileAmount; i > 0; i--)
         {
@@ -67,13 +61,6 @@ public class PlayerManager : MonoBehaviour {
             spaceCraftGO.transform.Rotate(rotation);
         }
 
-        if (powerUpScript.powerUpActivate)
-        {
-            spaceCraftScript.shootCooldown /= powerUpScript.divideReload;
-            powerUpScript.powerUpActivate = false;
-            powerUpGO.SetActive(false);
-        }
-
 
         // Note(Tim): Shooting is op dit moment nog 'broken', het omzetten naar object pooling is nog niet helemaal gelukt.
 
@@ -99,7 +86,7 @@ public class PlayerManager : MonoBehaviour {
                         sc.timeTilWeCanShoot = Time.time + sc.shootCooldown;
                         projectileList.Add(projectileGO.GetComponent<ProjectileScript>());
                         projectileGO.SetActive(true);
-                        projectileGO.GetComponent<Rigidbody>().velocity = transform.forward * projectileScript.projectileSpeed;
+                        projectileGO.GetComponent<Rigidbody>().velocity = transform.forward * psc.projectileSpeed;
                         currentProjectile = projectileList.Count - 1;
                         projectileList[currentProjectile].timeWhenExplodes = Time.time + projectileList[currentProjectile].secondsToLive;
                     }
