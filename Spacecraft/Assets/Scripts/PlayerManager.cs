@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlayerManager : MonoBehaviour {
     public GameObject projectileGO;
@@ -16,6 +17,7 @@ public class PlayerManager : MonoBehaviour {
 
     public List<ProjectileScript> projectileList = new List<ProjectileScript>();
     public List<GameObject> explosionList = new List<GameObject>();
+    public List<PowerUpScript> powerUpList = new List<PowerUpScript>();
 
     public ProjectileScript projectileScript;
     public Spacecraft spaceCraftScript;
@@ -29,6 +31,8 @@ public class PlayerManager : MonoBehaviour {
         spaceCraftRB = spaceCraftGO.GetComponent<Rigidbody>();
 
         powerUpScript = powerUpGO.GetComponent<PowerUpScript>();
+
+        powerUpList.AddRange(FindObjectsOfType<PowerUpScript>());
 
         for ( int i = projectileAmount; i > 0; i--)
         {
@@ -67,19 +71,28 @@ public class PlayerManager : MonoBehaviour {
             spaceCraftGO.transform.Rotate(rotation);
         }
 
-        if (powerUpScript.powerUpActivate)
+        for (int i = powerUpList.Count; i > 0; i--)
         {
-            spaceCraftScript.shootCooldown *= powerUpScript.reloadModifier;
-            powerUpScript.powerUpActivate = false;
-            powerUpGO.SetActive(false);
+            PowerUpScript powerUp = powerUpList[i - 1];
+            if (powerUp.powerUpActivate)
+            {
+                Debug.Log("1");
+                if (powerUp.powerUpCollision.gameObject.GetComponent<Spacecraft>() != null)
+                {
+                    Debug.Log("2");
+                    spaceCraftScript.shootCooldown *= powerUp.reloadModifier;
+                    powerUp.powerUpActivate = false;
+                    powerUp.gameObject.SetActive(false);
+                }    
+            }
         }
 
 
-        // Note(Tim): Shooting is op dit moment nog 'broken', het omzetten naar object pooling is nog niet helemaal gelukt.
+            // Note(Tim): Shooting is op dit moment nog 'broken', het omzetten naar object pooling is nog niet helemaal gelukt.
 
-        // Notes(gb): Don't do this every tick: the same script is needed each tick, 
-        // so scope this higher than the Update function (= as class variable)
-        if (Input.GetMouseButtonDown(0))
+            // Notes(gb): Don't do this every tick: the same script is needed each tick, 
+            // so scope this higher than the Update function (= as class variable)
+            if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
             Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity);
