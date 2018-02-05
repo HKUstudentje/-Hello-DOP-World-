@@ -43,9 +43,11 @@ public class PlayerManager : MonoBehaviour {
 
     void Update ()
     {
-        // Notes(gb): Make sure to take deltaTime into account, because of time-independent movement.
-        // look a little into what deltaTime is, and why it's used.
         float dt = Time.deltaTime;
+        float dx = Input.GetAxisRaw("Horizontal");
+
+        Vector3 rotation = dx * new Vector3(0, 1, 0) * spaceCraftScript.spaceCraftRotateSpeed * dt;
+        spaceCraftGO.transform.Rotate(rotation);
 
         if(Input.GetKey(KeyCode.W))
         {
@@ -57,18 +59,6 @@ public class PlayerManager : MonoBehaviour {
         {
             Vector3 force = spaceCraftGO.transform.forward * -spaceCraftScript.spaceCraftSpeed * dt;
             spaceCraftRB.AddForceAtPosition(force, transform.position, ForceMode.Impulse);
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            Vector3 rotation = new Vector3( 0, 1, 0 ) * spaceCraftScript.spaceCraftRotateSpeed * dt;
-            spaceCraftGO.transform.Rotate(rotation);
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            Vector3 rotation = new Vector3( 0, -1, 0 ) * spaceCraftScript.spaceCraftRotateSpeed * dt;
-            spaceCraftGO.transform.Rotate(rotation);
         }
 
         for (int i = powerUpList.Count; i > 0; i--)
