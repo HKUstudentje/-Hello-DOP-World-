@@ -74,15 +74,19 @@ public class PlayerManager : MonoBehaviour {
         for (int i = powerUpList.Count; i > 0; i--)
         {
             PowerUpScript powerUp = powerUpList[i - 1];
-            if (powerUp.powerUpActivate)
+            // We don't need a bool to check if something hit us:
+            // it is implicit: if collidedwith is not null, something hit us.
+            if (powerUp.CollidedWith != null)
             {
                 Debug.Log("1");
-                if (powerUp.powerUpCollision.gameObject.GetComponent<Spacecraft>() != null)
+                // always traverse the path to the rigidbody to check for components:
+                if (powerUp.CollidedWith.attachedRigidbody.GetComponent<Spacecraft>() != null)
                 {
                     Debug.Log("2");
                     spaceCraftScript.shootCooldown *= powerUp.reloadModifier;
-                    powerUp.powerUpActivate = false;
+                    powerUp.CollidedWith = null;
                     powerUp.gameObject.SetActive(false);
+                    powerUpList.RemoveAt(i - 1);
                 }    
             }
         }

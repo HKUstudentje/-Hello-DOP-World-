@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class PowerUpScript : MonoBehaviour {
     public float reloadModifier;
-    public Collider powerUpCollision;
-    public bool powerUpActivate;
-
-    private void Start()
-    {
-        powerUpActivate = false;
-    }
+    public Collider CollidedWith;
 
     private void OnTriggerEnter(Collider other)
     {
-        powerUpCollision = other;
-        powerUpActivate = true;
+        CollidedWith = other;
     }
 }
